@@ -1,0 +1,59 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  overflow-x:hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@mixin animation ($delay, $duration, $name, $timing, $iter) {
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-name: $name;
+  animation-timing-function: $timing;
+  animation-iteration-count: $iter;
+}
+
+@mixin keyframes ($animation_name) {
+  @keyframes #{$animation_name} {
+      @content;
+  }
+}
+
+/* svg1 */
+.svg1-off{
+  #leave1, #leave2, #leave3 {
+    path{
+      transform: translateY(-50vh);
+    }
+  }
+}
+.svg1 {
+  margin:0;
+  #leave1, #leave2, #leave3 {
+    @for $i from 1 to 14 {
+      path:nth-child(#{$i}){
+        will-change: transform;
+        transform: translateY(-50vh);
+        @include keyframes (fall) {
+          from {
+            transform: translate(0,-50vh);
+          }
+          to {
+            transform: translate(#{random(10) - 5}vw, 40vh);
+          }
+        }
+        @include animation(#{random(8)}s, #{random(10) + 9}s, fall, ease-out, infinite);
+      }
+    }
+  }
+}

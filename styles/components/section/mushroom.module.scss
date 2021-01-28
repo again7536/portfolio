@@ -1,0 +1,33 @@
+@mixin animation ($delay, $duration, $name, $timing, $iter) {
+    animation-delay: $delay;
+    animation-duration: $duration;
+    animation-name: $name;
+    animation-timing-function: $timing;
+    animation-iteration-count: $iter;
+}
+
+@mixin keyframes ($animation_name) {
+    @keyframes #{$animation_name} {
+        @content;
+    }
+}
+@font-face {
+    font-family: 'autumn';
+    src: url('/fonts/Autumn.ttf');
+}
+
+.article{
+    position:relative;
+    background:linear-gradient(#682D12,90%, #8C3C1E);
+    width:100vw;
+    height:min(100vh, 100vw);
+    margin-top:-1vh;
+    overflow:hidden;
+
+    color:white;
+    text-align:center;
+}
+
+.mushroom{
+    
+}
