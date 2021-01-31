@@ -4,6 +4,7 @@ import SVG, { Props as SVGProps } from 'react-inlinesvg';
 import styles from '../styles/pages/svg.module.scss';
 
 import Apple from '../components/section/apple';
+import Persimmon from '../components/section/persimmon';
 
 interface Size{
     width: number,
@@ -45,6 +46,7 @@ function SVGtest() {
             </div>
             
             <Apple scrollY={scrollY} windowSize={windowSize}/>
+            <Persimmon scrollY={scrollY} windowSize={windowSize}/>
 
             <div className={styles.footer}>
                 <a href="http://www.freepik.com">Autumn SVG - Designed by Freepik</a>

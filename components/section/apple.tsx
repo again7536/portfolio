@@ -3,53 +3,75 @@ import SVG, { Props as SVGProps } from 'react-inlinesvg';
 import styles from '../../styles/components/section/apple.module.scss';
 
 function Apple({scrollY, windowSize}) {
-    const sectionRef = useRef<HTMLDivElement>();
-    const [sectionScrollY, setsectionScrollY] = useState<number>(0);
+    const bannerRef = useRef<HTMLDivElement>();
+    const articleRef = useRef<HTMLDivElement>();
+    const [bannerScrollY, setBannerScrollY] = useState<number>(0);
+    const [articleScrollY, setArticleScrollY] = useState<number>(0);
 
     useEffect(() => {
-        setsectionScrollY(scrollY - sectionRef.current.offsetTop);
+        setBannerScrollY(scrollY - bannerRef.current.offsetTop);
+        setArticleScrollY(scrollY - articleRef.current.offsetTop);
     },[scrollY]);
 
     /* animation variables */
     const speed = 2;
-    const weighedScrollY = sectionScrollY * speed;
-    const halfWidth = windowSize.width / 2;
+    const weighedScrollY = bannerScrollY * speed;
+    const halfSize = (windowSize.height > windowSize.width? windowSize.height : windowSize.width) / 2;
 
     const appleStyle = {
         transform:`
-            translateX(${weighedScrollY < halfWidth ? weighedScrollY : halfWidth}px) 
-            rotateZ(${weighedScrollY < halfWidth ? weighedScrollY * 720 / windowSize.width : 360}deg)
-            translateY(${weighedScrollY > halfWidth ?
-                weighedScrollY < windowSize.width ? 
-                    (weighedScrollY - halfWidth) 
-                    : halfWidth
+            translateX(${weighedScrollY <  windowSize.width / 2 ? weighedScrollY*2 : windowSize.width}px) 
+            rotateZ(${weighedScrollY < windowSize.width / 2 ? weighedScrollY * 720 / windowSize.width : 360}deg)
+            translateY(${weighedScrollY > halfSize ?
+                weighedScrollY < halfSize*2 ? 
+                    (weighedScrollY - halfSize) 
+                    : halfSize
                 : 0}px)
-            scale(${weighedScrollY > halfWidth ? 
-                weighedScrollY < windowSize.width ? 
-                    1 + (weighedScrollY - halfWidth) / 64 
-                    : 1 + halfWidth / 64
+            scale(${weighedScrollY > windowSize.width / 2 ? 
+                weighedScrollY < halfSize*2 ? 
+                    1 + (weighedScrollY - windowSize.width / 2) / 64 
+                    : 1 + (halfSize + windowSize.width / 2) / 64
                 : 1})`
     }
 
     return (
-        <div className={styles.appleSections}>
-            <div ref={sectionRef} className={styles.section}>
+        <div className={styles.appleSection}>
+            <div ref={bannerRef} className={styles.banner}>
                 <h1>Foods in season</h1>
                 <div className={styles.appleWrap}>
-                    <SVG style={sectionScrollY > -500 ? appleStyle :null}
-                    className={weighedScrollY > windowSize.width ? styles.appleMasked : styles.apple} src='/apple.svg' width='50vh' height='50vh'/>
+                    <SVG style={bannerScrollY > -500 ? appleStyle :null}
+                    className={weighedScrollY > halfSize * 2 ? styles.appleMasked : styles.apple} 
+                    src='/section/apple/apple.svg'/>
                 </div>
-                <div className={styles.article} style={{opacity: weighedScrollY > windowSize.width ? 1 : 0}}>
+
+            </div>
+            <div ref={articleRef} 
+                className={styles.article} 
+                style={{backgroundColor: weighedScrollY >  halfSize * 2 ? '#5c0000' : '#ff0000'}}>
+                <div className={styles.title} style={{opacity: weighedScrollY > windowSize.width ? 1 : 0}}>
                     <h2>Apple</h2>
                 </div>
-            </div>
-            <div className={styles.section2} style={{backgroundColor: weighedScrollY > windowSize.width ? '#5c0000' : '#ff0000'}}>
                 <div className={styles.imageWrap}>
-                    <img className={styles.image} src='/section/apple/apple_pick.jpg'></img>
-                    <img className={styles.image} src='/section/apple/apple_pick2.webp'></img>
-                    <img className={styles.image} src='/section/apple/apple_pick.jpg'></img>
-                    <img className={styles.image} src='/section/apple/apple_pick.jpg'></img>
+                    <img className={styles.image} 
+                    style={{transform:`translateY(${-articleScrollY/8}px)`}} 
+                    src='/section/apple/apple_pick.jpg'/>
+                    <img className={styles.image} 
+                    style={{transform:`translateY(${articleScrollY/8}px)`}}
+                    src='/section/apple/apple_pick2.webp'/>
+                    <img className={styles.image} 
+                    style={{transform:`translateY(${-articleScrollY/8}px)`}}
+                    src='/section/apple/apple_pick3.jpeg'/>
+                    <img className={styles.image} 
+                    style={{transform:`translateY(${articleScrollY/8}px)`}}
+                    src='/section/apple/apple_pick4.jpg'/>
                 </div>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Ut dictum velit vitae nisi faucibus, ac consequat elit ullamcorper. 
+                    In tempus tempor ultrices. Ut lacus enim, cursus eget condimentum et, blandit et ex. 
+                    Fusce ligula urna, vulputate ut egestas vitae, elementum a arcu. 
+                    Cras pulvinar turpis sit amet ex pretium facilisis. Cras lacinia dapibus pretium.
+                </p>
             </div>
         </div>
     )

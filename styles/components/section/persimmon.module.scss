@@ -11,23 +11,17 @@
         @content;
     }
 }
-@font-face {
-    font-family: 'autumn';
-    src: url('/fonts/Autumn.ttf');
-}
 
-.article{
+.persimSection {
     position:relative;
-    background:linear-gradient(#682D12,90%, #8C3C1E);
+    height:max(100vh, 100vw);
     width:100vw;
-    height:min(100vh, 100vw);
-    margin-top:-1vh;
-    overflow:hidden;
-
-    color:white;
-    text-align:center;
+    transition:ease-in-out 1.0s;
 }
-
-.mushroom{
+.persimmon{
+    $persimSize:max(50vh, 100vw);
+    position:absolute;
     
+    width:100vw; 
+    height:#{$persimSize};
 }
