@@ -4,7 +4,7 @@ import {mat4, vec2, vec3} from 'gl-matrix';
 import Circle from '../components/webgl/circle';
 
 export default function WebGLtest() {
-    const canvasRef = useRef();
+    const canvasRef = useRef<HTMLCanvasElement>();
 
     const fragPath = '/shader/shader.frag';
     const vertPath = '/shader/shader.vert';

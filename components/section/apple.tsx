@@ -48,9 +48,9 @@ function Apple({scrollY, windowSize}) {
             <div ref={articleRef} 
                 className={styles.article} 
                 style={{backgroundColor: weighedScrollY >  halfSize * 2 ? '#5c0000' : '#ff0000'}}>
-                <div className={styles.title} style={{opacity: weighedScrollY > windowSize.width ? 1 : 0}}>
-                    <h2>Apple</h2>
-                </div>
+                <h2 className={styles.title} style={{opacity: weighedScrollY > windowSize.width ? 1 : 0}}>
+                    Apple
+                </h2>
                 <div className={styles.imageWrap}>
                     <img className={styles.image} 
                     style={{transform:`translateY(${-articleScrollY/8}px)`}} 

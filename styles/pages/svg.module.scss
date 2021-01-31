@@ -7,3 +7,14 @@
     position:relative;
     min-width:100vw;
 }
+.footer{
+    background-color:black;
+    color:white;
+    height:max(10vh, 10vw);
+    width:100%;
+
+    display:flex;
+    flex-flow:column;
+    align-items:center;
+    justify-content: center;
+}

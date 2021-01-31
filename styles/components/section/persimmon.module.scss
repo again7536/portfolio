@@ -11,12 +11,21 @@
         @content;
     }
 }
+@font-face {
+    font-family: 'today-easter';
+    src: url('/fonts/Today-Easter.ttf');
+}
 
 .persimSection {
+    
+    overflow:hidden;
+
+}
+.banner {
     position:relative;
-    height:max(100vh, 100vw);
+    height:max(200vh, 200vw);
     width:100vw;
-    transition:ease-in-out 1.0s;
+    transition:ease-in-out 0.4s;
 }
 .persimmon{
     $persimSize:max(50vh, 100vw);
@@ -24,4 +33,68 @@
     
     width:100vw; 
     height:#{$persimSize};
+    overflow:visible;
+}
+
+.article{
+    position:relative;
+    height:max(90vw, 100vh);
+    width:100%;
+    background-color:#f1613a;
+    .title {
+        font-family:today-easter;
+        height:max(20vw, 20vh);
+        width:100%;
+        text-align:center;
+        color:white;
+        transform: translateZ(1px);
+        transition:1s ease-in-out;
+
+        padding-top:max(5vw, 5vh);
+        font-size:max(7vw, 7vh);
+        margin:0;
+    }
+    p{
+        width:95%;
+        margin-left:2.5%;
+        text-align:center;
+        color:white;
+        font-size:max(3vw, 2.5vh);
+    }
+}
+
+.imageWrap{
+    position:relative;
+    width:80%;
+    height:max(40vw, 40vh);
+    margin-left:10%;
+
+    .image{
+        position:absolute;
+        object-fit: cover;
+        width:1px;
+        height:1px;
+    }
+    .image:nth-child(1) {
+        left:5vw;
+        top:15vh;
+        width:max(12vh, 12vw);
+        height:max(25vh, 25vw);
+    }
+    .image:nth-child(2) {
+        left:21vw;
+        width:max(20vh, 20vw);
+        height:max(25vh,25vw);
+    }
+    .image:nth-child(3) {
+        right:21vw;
+        top:10vh;
+        width:max(20vh, 20vw);
+        height:max(25vh, 25vw);
+    }
+    .image:nth-child(4) {
+        right:5vw;
+        width:max(12vh, 12vw);
+        height:max(25vh, 25vw);
+    }
 }
