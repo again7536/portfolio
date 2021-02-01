@@ -44,6 +44,7 @@ a {
     @font-face {
       font-family: 'Nickainley';
       src: url('/fonts/Nickainley-Normal.otf');
+      font-display:swap;
     }
     font-family:Nickainley;
   }
@@ -51,6 +52,7 @@ a {
     @font-face {
       font-family: 'Montserrat';
       src: url('/fonts/Montserrat-MediumItalic.ttf');
+      font-display:swap;
     }
     font-family:Montserrat;
   }
