@@ -28,6 +28,16 @@ a {
       @content;
   }
 }
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-MediumItalic.ttf');
+  font-display:swap;
+}
+@font-face {
+  font-family: 'Nickainley';
+  src: url('/fonts/Nickainley-Normal.otf');
+  font-display:swap;
+}
 
 /* svg1 in autumn.tsx */
 .svg1-off{
@@ -41,19 +51,9 @@ a {
   margin:0;
 
   .cls-30 {
-    @font-face {
-      font-family: 'Nickainley';
-      src: url('/fonts/Nickainley-Normal.otf');
-      font-display:swap;
-    }
     font-family:Nickainley;
   }
   .cls-31 {
-    @font-face {
-      font-family: 'Montserrat';
-      src: url('/fonts/Montserrat-MediumItalic.ttf');
-      font-display:swap;
-    }
     font-family:Montserrat;
   }
 
