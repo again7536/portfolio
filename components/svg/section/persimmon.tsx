@@ -15,7 +15,6 @@ function Persimmon({scrollY, windowSize}) {
 
     /* animation variables */
     const speed = 2;
-    const weighedScrollY = bannerScrollY * speed;
     const halfSize = (windowSize.height > windowSize.width? windowSize.height/2 : windowSize.width) / 2;
 
     return (
@@ -23,16 +22,26 @@ function Persimmon({scrollY, windowSize}) {
             <style jsx global>{`
                 #persimmon {
                     transform-box: fill-box;
-                    transform-origin:${bannerScrollY < halfSize * 2? '50% 0': '50% 50%'};
-                    transform:rotateZ(${bannerScrollY < halfSize ? Math.sin(bannerScrollY/32) * 15 : 0}deg)
+                    transform-origin:${bannerScrollY < halfSize * 2? 
+                        '50% 0'
+                        : '50% 50%'};
+                    transform:
+                        rotateZ(${bannerScrollY > 0 && bannerScrollY < halfSize ? 
+                            Math.sin(bannerScrollY/32) * 15 
+                            : 0}deg)
                         translateY(${bannerScrollY > halfSize? 
-                            bannerScrollY > halfSize*2? 35
-                            :35*(bannerScrollY-halfSize)/halfSize : 0}vh)
-                        scale(${bannerScrollY > halfSize*2? (bannerScrollY-halfSize*2)/20 + 1: 1});
+                                bannerScrollY > halfSize * 2? 
+                                halfSize/2
+                                :(bannerScrollY-halfSize)/2
+                            : 0}px)
+                        scale(${bannerScrollY > halfSize*2 && bannerScrollY < halfSize*4? 
+                            (bannerScrollY-halfSize*2)/20 + 1
+                            : 1});
                 }
             `}</style>
-            <div ref={bannerRef} className={styles.banner}
-            style={{backgroundColor:bannerScrollY<halfSize/2?'#5c0000':'orange'}}>
+            <div ref={bannerRef} 
+            className={styles.banner}
+            style={{backgroundColor : bannerScrollY < halfSize ? '#5c0000' : 'orange'}}>
                 <SVG src='/section/persimmon/tree3.svg' className={styles.persimmon}/>
             </div>
 

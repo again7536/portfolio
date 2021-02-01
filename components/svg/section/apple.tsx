@@ -20,15 +20,19 @@ function Apple({scrollY, windowSize}) {
 
     const appleStyle = {
         transform:`
-            translateX(${weighedScrollY <  windowSize.width / 2 ? weighedScrollY*2 : windowSize.width}px) 
-            rotateZ(${weighedScrollY < windowSize.width / 2 ? weighedScrollY * 720 / windowSize.width : 360}deg)
+            translateX(${weighedScrollY <  windowSize.width / 2 ? 
+                weighedScrollY*2 
+                : windowSize.width}px)
+            rotateZ(${bannerScrollY > 0 && weighedScrollY < windowSize.width / 2 ?
+                 weighedScrollY * 720 / windowSize.width 
+                 : 360}deg)
             translateY(${weighedScrollY > halfSize ?
-                weighedScrollY < halfSize*2 ? 
-                    (weighedScrollY - halfSize) 
+                    weighedScrollY < halfSize*2 ? 
+                    weighedScrollY - halfSize
                     : halfSize
                 : 0}px)
-            scale(${weighedScrollY > windowSize.width / 2 ? 
-                weighedScrollY < halfSize*2 ? 
+            scale(${ bannerScrollY > 0 && weighedScrollY > windowSize.width / 2 ? 
+                    weighedScrollY < halfSize*2 ? 
                     1 + (weighedScrollY - windowSize.width / 2) / 64 
                     : 1 + (halfSize + windowSize.width / 2) / 64
                 : 1})`
