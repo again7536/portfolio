@@ -47,7 +47,7 @@ function SVGtest() {
             <div className={styles.page}>
                 <div className={styles.svgWrap} ref={svgRef}>
                     <SVG className={svgOnScreen? 'svg1' : 'svg1-off'} 
-                    src='/autumn4.svg' height={windowSize.width < 1024 ? windowSize.height: null} width={windowSize.width < 1024? null: windowSize.width}/>
+                    src='/autumn4.svg' height={windowSize.width < 1024 ? '100vh': 'auto'} width={windowSize.width < 1024? 'auto': '100vw'}/>
                 </div>
                 
                 <Apple scrollY={scrollY} windowSize={windowSize}/>
