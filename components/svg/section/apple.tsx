@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect}from 'react';
 import SVG, { Props as SVGProps } from 'react-inlinesvg';
-import styles from '../../styles/components/section/apple.module.scss';
+import styles from '../../../styles/components/section/apple.module.scss';
 
 function Apple({scrollY, windowSize}) {
     const bannerRef = useRef<HTMLDivElement>();

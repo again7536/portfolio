@@ -5,9 +5,9 @@ export default function Home() {
 
     return (
         <div>
-            <h1>View Tests</h1>
-            <ul>
-                <li><Link href="/svg">SVG#1</Link></li>
+            <h1>My blog</h1>
+            <ul className='projects'>
+                <li><Link href="/autumn">SVG#1</Link></li>
                 <li><Link href="/webgl">WebGL#1</Link></li>
             </ul>
         </div>

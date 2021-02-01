@@ -1,10 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react';
 import useOnScreen from '../components/hooks/useOnScreen';
 import SVG, { Props as SVGProps } from 'react-inlinesvg';
-import styles from '../styles/pages/svg.module.scss';
+import styles from '../styles/pages/autumn.module.scss';
 
-import Apple from '../components/section/apple';
-import Persimmon from '../components/section/persimmon';
+import Apple from '../components/svg/section/apple';
+import Persimmon from '../components/svg/section/persimmon';
 
 interface Size{
     width: number,
@@ -21,7 +21,7 @@ function SVGtest() {
         setScrollY(window.scrollY);
     }
     const resized = () => {
-        setWindowSize({width:window.innerWidth, height:window.innerHeight});
+        setWindowSize({width:window.outerWidth, height:window.outerHeight});
     }
 
     useEffect(()=> {

@@ -1,6 +1,6 @@
 import React, {useRef, useState, useEffect}from 'react';
 import SVG, { Props as SVGProps } from 'react-inlinesvg';
-import styles from '../../styles/components/section/persimmon.module.scss';
+import styles from '../../../styles/components/section/persimmon.module.scss';
 
 function Persimmon({scrollY, windowSize}) {
     const bannerRef = useRef<HTMLDivElement>();
