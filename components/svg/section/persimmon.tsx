@@ -9,14 +9,16 @@ function Persimmon({scrollY, windowSize}) {
     const [articleScrollY, setArticleScrollY] = useState<number>(0);
 
     useEffect(() => {
-        setbannerScrollY(scrollY - bannerRef.current.offsetTop);
+        if(windowSize.height > windowSize.width && windowSize.width <= 1024)
+            setbannerScrollY((scrollY - bannerRef.current.offsetTop)*3 + windowSize.width/2);
+        else
+            setbannerScrollY(scrollY - bannerRef.current.offsetTop);
         setArticleScrollY(scrollY - articleRef.current.offsetTop);
     }, [scrollY]);
 
     /* animation variables */
     const speed = 2;
-    const halfSize = (windowSize.height > windowSize.width? windowSize.height/2 : windowSize.width) / 2;
-
+    const halfSize = (windowSize.height > windowSize.width? windowSize.height : windowSize.width) / 2;
     return (
         <div className={styles.persimSection}>
             <style jsx global>{`
@@ -26,15 +28,15 @@ function Persimmon({scrollY, windowSize}) {
                         '50% 0'
                         : '50% 50%'};
                     transform:
-                        rotateZ(${bannerScrollY > 0 && bannerScrollY < halfSize ? 
+                        translateY(${bannerScrollY > halfSize? 
+                            bannerScrollY > halfSize * 2? 
+                            halfSize/2
+                            :(bannerScrollY-halfSize)/2
+                        : 0}px)
+                        rotateZ(${bannerScrollY > -400 && bannerScrollY < halfSize ? 
                             Math.sin(bannerScrollY/32) * 15 
                             : 0}deg)
-                        translateY(${bannerScrollY > halfSize? 
-                                bannerScrollY > halfSize * 2? 
-                                halfSize/2
-                                :(bannerScrollY-halfSize)/2
-                            : 0}px)
-                        scale(${bannerScrollY > halfSize*2 && bannerScrollY < halfSize*4? 
+                        scale(${bannerScrollY > halfSize*2 && bannerScrollY < halfSize*14? 
                             (bannerScrollY-halfSize*2)/20 + 1
                             : 1});
                 }

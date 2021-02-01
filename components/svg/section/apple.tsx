@@ -14,28 +14,28 @@ function Apple({scrollY, windowSize}) {
     },[scrollY]);
 
     /* animation variables */
-    const speed = 2;
-    const weighedScrollY = bannerScrollY * speed;
+    const speed = 1;
     const halfSize = (windowSize.height > windowSize.width? windowSize.height : windowSize.width) / 2;
 
     const appleStyle = {
         transform:`
-            translateX(${weighedScrollY <  windowSize.width / 2 ? 
-                weighedScrollY*2 
+            translateX(${bannerScrollY <  windowSize.width / 2 ? 
+                bannerScrollY*2 
                 : windowSize.width}px)
-            rotateZ(${bannerScrollY > 0 && weighedScrollY < windowSize.width / 2 ?
-                 weighedScrollY * 720 / windowSize.width 
+            translateY(${bannerScrollY > 0 ?
+                bannerScrollY < halfSize*2 ? 
+                bannerScrollY
+                : halfSize*2
+            : 0}px)
+            rotateZ(${bannerScrollY > 0 && bannerScrollY < windowSize.width / 2 ?
+                 bannerScrollY * 1440 / windowSize.width 
                  : 360}deg)
-            translateY(${weighedScrollY > halfSize ?
-                    weighedScrollY < halfSize*2 ? 
-                    weighedScrollY - halfSize
-                    : halfSize
-                : 0}px)
-            scale(${ bannerScrollY > 0 && weighedScrollY > windowSize.width / 2 ? 
-                    weighedScrollY < halfSize*2 ? 
-                    1 + (weighedScrollY - windowSize.width / 2) / 64 
+            scale(${ bannerScrollY > 0 && bannerScrollY > windowSize.width / 2 ? 
+                    bannerScrollY < halfSize*2 ? 
+                    1 + (bannerScrollY - windowSize.width / 2) / 64 
                     : 1 + (halfSize + windowSize.width / 2) / 64
-                : 1})`
+                : 1})`,
+        transformOrigin:'center center'
     }
 
     return (
@@ -44,15 +44,15 @@ function Apple({scrollY, windowSize}) {
                 <h1>Foods in season</h1>
                 <div className={styles.appleWrap}>
                     <SVG style={bannerScrollY > -500 ? appleStyle :null}
-                    className={weighedScrollY > halfSize * 2 ? styles.appleMasked : styles.apple} 
+                    className={bannerScrollY > halfSize * 2 ? styles.appleMasked : styles.apple} 
                     src='/section/apple/apple.svg'/>
                 </div>
 
             </div>
             <div ref={articleRef} 
                 className={styles.article} 
-                style={{backgroundColor: weighedScrollY >  halfSize * 2 ? '#5c0000' : '#ff0000'}}>
-                <h2 className={styles.title} style={{opacity: weighedScrollY > windowSize.width ? 1 : 0}}>
+                style={{backgroundColor: bannerScrollY >  halfSize * 2 ? '#5c0000' : '#ff0000'}}>
+                <h2 className={styles.title} style={{opacity: bannerScrollY > windowSize.width ? 1 : 0}}>
                     Apple
                 </h2>
                 <div className={styles.imageWrap}>
