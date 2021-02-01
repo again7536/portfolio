@@ -39,6 +39,23 @@ a {
 }
 .svg1 {
   margin:0;
+
+  .cls-30 {
+    @font-face {
+      font-family: Nickainley;
+      src: url('/fonts/Nickainley-Normal.otf');
+    }
+    font-family:Nickainley;
+  }
+  .cls-31 {
+    @font-face {
+      font-family: Montserrat;
+      src: url('/fonts/Montserrat-MediumItalic.ttf');
+    }
+    font-family:Montserrat;
+  }
+
+
   #leave1, #leave2, #leave3 {
     @for $i from 1 to 14 {
       path:nth-child(#{$i}){
