@@ -9,16 +9,13 @@ function Persimmon({scrollY, windowSize}) {
     const [articleScrollY, setArticleScrollY] = useState<number>(0);
 
     useEffect(() => {
-        if(windowSize.height > windowSize.width && windowSize.width <= 1024)
-            setbannerScrollY((scrollY - bannerRef.current.offsetTop)*3 + windowSize.width/2);
-        else
-            setbannerScrollY(scrollY - bannerRef.current.offsetTop);
+        setbannerScrollY(scrollY - bannerRef.current.offsetTop);
         setArticleScrollY(scrollY - articleRef.current.offsetTop);
     }, [scrollY]);
 
     /* animation variables */
-    const speed = 2;
-    const halfSize = (windowSize.height > windowSize.width? windowSize.height : windowSize.width) / 2;
+    const halfSize = windowSize.width / 2;
+    const weight = windowSize.height > windowSize.width? 3 : 1;
     return (
         <div className={styles.persimSection}>
             <style jsx global>{`
@@ -28,16 +25,16 @@ function Persimmon({scrollY, windowSize}) {
                         '50% 0'
                         : '50% 50%'};
                     transform:
-                        translateY(${bannerScrollY > halfSize? 
+                        translateY(${(bannerScrollY > halfSize? 
                             bannerScrollY > halfSize * 2? 
-                            halfSize/2
-                            :(bannerScrollY-halfSize)/2
-                        : 0}px)
+                            30
+                            :30*(bannerScrollY-halfSize)/halfSize
+                        : 0) * weight}vh)
                         rotateZ(${bannerScrollY > -400 && bannerScrollY < halfSize ? 
                             Math.sin(bannerScrollY/32) * 15 
                             : 0}deg)
-                        scale(${bannerScrollY > halfSize*2 && bannerScrollY < halfSize*14? 
-                            (bannerScrollY-halfSize*2)/20 + 1
+                        scale(${bannerScrollY > halfSize*2 && bannerScrollY < halfSize*8? 
+                            (bannerScrollY-halfSize*2)/20 * weight + 1
                             : 1});
                 }
             `}</style>
