@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
+import Head from 'next/head';
 import useOnScreen from '../components/hooks/useOnScreen';
 import SVG, { Props as SVGProps } from 'react-inlinesvg';
 import styles from '../styles/pages/autumn.module.scss';
@@ -39,20 +40,25 @@ function SVGtest() {
     }, [windowSize]);
 
     return (
-        <div className={styles.page}>
-            <div className={styles.svgWrap} ref={svgRef}>
-                <SVG className={svgOnScreen? 'svg1' : 'svg1-off'} 
-                src='/autumn4.svg' height={windowSize.width < 1024 ? windowSize.height: null} width={windowSize.width < 1024? null: windowSize.width}/>
-            </div>
-            
-            <Apple scrollY={scrollY} windowSize={windowSize}/>
-            <Persimmon scrollY={scrollY} windowSize={windowSize}/>
+        <>
+            <Head>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            </Head>
+            <div className={styles.page}>
+                <div className={styles.svgWrap} ref={svgRef}>
+                    <SVG className={svgOnScreen? 'svg1' : 'svg1-off'} 
+                    src='/autumn4.svg' height={windowSize.width < 1024 ? windowSize.height: null} width={windowSize.width < 1024? null: windowSize.width}/>
+                </div>
+                
+                <Apple scrollY={scrollY} windowSize={windowSize}/>
+                <Persimmon scrollY={scrollY} windowSize={windowSize}/>
 
-            <div className={styles.footer}>
-                <a href="http://www.freepik.com">Autumn SVG - Designed by Freepik</a>
-                <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                <div className={styles.footer}>
+                    <a href="http://www.freepik.com">Autumn SVG - Designed by Freepik</a>
+                    <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
