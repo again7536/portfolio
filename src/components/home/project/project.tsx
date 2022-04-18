@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import styles from '../../styles/components/home/project.module.scss';
+import styles from './project.module.scss';
 
 export default function Project({mount, src}:{mount:boolean, src:string}):JSX.Element {
     const [render, setRender] = useState<boolean>(mount);

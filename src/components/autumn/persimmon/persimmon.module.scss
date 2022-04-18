@@ -19,17 +19,15 @@
 .persimSection {
     margin-top:-1vh;
     overflow:hidden;
-
 }
 .banner {
     position:relative;
-    height:max(200vh, 200vw);
+    height:max(200vh, 180vw);
     width:100vw;
     transition:ease-in-out 0.4s;
 }
 .persimmon{
     $persimSize:max(50vh, 100vw);
-    position:absolute;
     
     width:100vw; 
     height:#{$persimSize};
@@ -41,6 +39,7 @@
     height:max(90vw, 100vh);
     width:100%;
     background-color:#f1613a;
+
     .title {
         font-family:today-easter;
         height:max(20vw, 20vh);
@@ -70,6 +69,7 @@
     margin-left:10%;
 
     .image{
+        transition:0.1s linear;
         position:absolute;
         object-fit: cover;
         width:1px;

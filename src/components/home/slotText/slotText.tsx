@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import useWindowSize from '../hooks/useWindowSize';
-import styles from '../../styles/components/home/slotText.module.scss';
+import useWindowSize from '../../hooks/useWindowSize';
+import styles from './slotText.module.scss';
 
 interface Props {
     start:Boolean,

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Link from 'next/link';
-import styles from '../styles/pages/Home.module.scss';
+import styles from './Home.module.scss';
 
 import SVG from 'react-inlinesvg';
-import SlotText from '../components/home/slotText';
-import Navbar from '../components/home/navbar';
+import SlotText from '../components/home/slotText/slotText';
+import Navbar from '../components/home/navbar/navbar';
 
 interface FloatMove {
     x:number,

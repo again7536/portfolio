@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../styles/pages/contact.module.scss';
-import Navbar from '../components/home/navbar';
+import styles from './contact.module.scss';
+import Navbar from '../../components/home/navbar/navbar';
 
 export default function Contact() {
     return (

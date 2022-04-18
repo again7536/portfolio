@@ -1,18 +1,20 @@
-import React, {useState, useEffect} from 'react';
-import useWindowSize from '../components/hooks/useWindowSize';
-import styles from '../styles/pages/work.module.scss';
+import React, {useState, useEffect, useCallback} from 'react';
+import useWindowSize from '../../components/hooks/useWindowSize';
+import styles from './work.module.scss';
 
-import Navbar from '../components/home/navbar';
-import Project from '../components/home/project';
+import Navbar from '../../components/home/navbar/navbar';
+import Project from '../../components/home/project/project';
+import { debounce, throttle } from 'lodash';
 
 export default function Work() {
     const [circleTouchStart, setCircleTouchStart] = useState<number>(0);
+    const [circleTouch, setCircleTouch] = useState<number>(0);
     const [projectTouchStart, setProjectTouchStart] = useState<number>(0);
     const [scrollCircle, setScrollCircle] = useState<number>(0);
     const [scrollProject, setScrollProject] = useState<number>(0);
     const windowSize = useWindowSize();
 
-        //these will be replaced with DB data.
+    //these will be replaced with DB data.
     const years = [2021, 2022, 2023];
     const images = [{year:2021, src:'/home/projects/project1.png'},
                     {year:2021, src:'/home/projects/project2.jpg'},
@@ -28,15 +30,32 @@ export default function Work() {
         setScrollProject(0);
     }, [yearIndex]);
 
+    const handleTouchStart = e => {
+        //setScrollCircle
+        //setScrollCircle(0);
+        setCircleTouchStart(e.touches[0].pageX);
+        setCircleTouch(e.touches[0].pageX);
+    }
+    const handleTouchMove = throttle(e=> {
+        setCircleTouch(e.changedTouches[0].pageX);
+    }, 100);
+
+    const handleTouchEnd = (e) => setTimeout(e => {
+        if(Math.abs(circleTouch - circleTouchStart) > 20)
+        setScrollCircle(scrollCircle - 3*(circleTouch - circleTouchStart));
+    },1);
+
     return(
         <>
         <Navbar/>
         <div className={styles.work}>
             <div className={styles.circle} 
-            style={{transform:`rotate(${scrollCircle*rotationSpeed}deg)`}}
-            onWheel={(e)=>setScrollCircle(scrollCircle + e.deltaY)}
-            onTouchStart={e=>{setCircleTouchStart(e.touches[0].pageX)}}
-            onTouchMove={e=>{setScrollCircle(scrollCircle - 0.4*(e.changedTouches[0].pageX - circleTouchStart))}}
+                style={{transform:`rotate(${scrollCircle*rotationSpeed}deg)`}}
+                onScroll={e=>{e.preventDefault();console.log('here');}}
+                onWheel={(e)=>setScrollCircle(scrollCircle + e.deltaY)}
+                onTouchStart={e=>handleTouchStart(e)}
+                onTouchMove={e=>handleTouchMove(e)}
+                onTouchEnd={e=>handleTouchEnd(e)}
             >
                 <h1>works</h1>
                 {years.map((year, index) => 
@@ -51,27 +70,9 @@ export default function Work() {
                     </div>
                 )}
             </div>
-            <div className={styles.projectWrap}
-                onWheel={(e)=>setScrollProject((scrollProject) => {
-                    const copyProject = scrollProject - e.deltaY
-                    if(copyProject < minScrollProject) 
-                        return minScrollProject;
-                    else if(copyProject > 0)
-                        return 0;
-                    else
-                        return copyProject;
-                })}
-                onTouchStart={e=>{setProjectTouchStart(e.touches[0].pageY)}}
-                onTouchMove={e=>setScrollProject((scrollProject) => {
-                    const copyProject = scrollProject + 0.1*(e.changedTouches[0].pageY - projectTouchStart);
-                    if(copyProject < minScrollProject) 
-                        return minScrollProject;
-                    else if(copyProject > 0)
-                        return 0;
-                    else
-                        return copyProject;
-                })}
-            >
+            <div className={styles.circlePlace}/>
+
+            <div className={styles.projectWrap}>
                 <div className={styles.projects}
                     style={{transform:`translateY(${scrollProject}px)`}}
                 >

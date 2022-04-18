@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import styles from '../styles/pages/about.module.scss';
+import styles from './about.module.scss';
 
-import Navbar from '../components/home/navbar';
+import Navbar from '../../components/home/navbar/navbar';
 
 export default function About():JSX.Element {
     const [showCV, setShowCV] = useState<Boolean>(false);

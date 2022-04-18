@@ -1,6 +1,8 @@
-import React, {useRef, useState, useEffect}from 'react';
+import React, {useRef, useState, useEffect, useCallback}from 'react';
 import SVG, { Props as SVGProps } from 'react-inlinesvg';
-import styles from '../../styles/components/autumn/apple.module.scss';
+import {throttle} from 'lodash';
+
+import styles from './apple.module.scss';
 
 function Apple({scrollY, windowSize}) {
     const bannerRef = useRef<HTMLDivElement>();
@@ -8,33 +10,35 @@ function Apple({scrollY, windowSize}) {
     const [bannerScrollY, setBannerScrollY] = useState<number>(0);
     const [articleScrollY, setArticleScrollY] = useState<number>(0);
 
+    const throttledArticleScroll = useCallback(throttle(newValue => {
+        setArticleScrollY(newValue);
+    }, 100), []);
+    const throttledBannerScroll = useCallback(throttle((newValue) => {
+        setBannerScrollY(newValue);
+    }, 100), []);
+
+    const max = (a:number, b:number) => a>b?a:b;
+    const min = (a:number, b:number) => a<b?a:b;
+
     useEffect(() => {
-        setBannerScrollY(scrollY - bannerRef.current.offsetTop);
-        setArticleScrollY(scrollY - articleRef.current.offsetTop);
-    },[scrollY]);
+        throttledBannerScroll(scrollY - bannerRef.current.offsetTop);
+        throttledArticleScroll(scrollY - articleRef.current.offsetTop);
+    }, [scrollY]);
 
     /* animation variables */
     const halfSize = (windowSize.height > windowSize.width? windowSize.height : windowSize.width) / 2;
+    const weight = windowSize.height > windowSize.width? 1.4 : 1;
 
     const appleStyle:React.CSSProperties = {
         transform:`
-            translateX(${bannerScrollY <  windowSize.width / 2 ? 
-                bannerScrollY*2 
-                : windowSize.width}px)
-            translateY(${bannerScrollY > 0 ?
-                bannerScrollY < halfSize*2 ? 
-                bannerScrollY
-                : halfSize*2
-            : 0}px)
+            translateX(${min(bannerScrollY, windowSize.width/2) * 2}px)
+            translateY(${max(min(bannerScrollY * weight, halfSize*1.4), 0)}px)
             rotateZ(${bannerScrollY > 0 && bannerScrollY < windowSize.width / 2 ?
                  bannerScrollY * 1440 / windowSize.width 
-                 : 360}deg)
-            scale(${ bannerScrollY > 0 && bannerScrollY > windowSize.width / 2 ? 
-                    bannerScrollY < halfSize*2 ? 
-                    1 + (bannerScrollY - windowSize.width / 2) / 64 
-                    : 1 + (halfSize + windowSize.width / 2) / 64
-                : 1})`,
-        transformOrigin:'center center'
+                 : 720}deg)
+            scale(${min(1 + max(bannerScrollY - windowSize.width / 2, 0) / 64, 6)*weight})`,
+        transformOrigin:'center center',
+        transition: '0.1s linear'
     }
 
     return (
@@ -42,7 +46,8 @@ function Apple({scrollY, windowSize}) {
             <div ref={bannerRef} className={styles.banner}>
                 <h1>Foods in season</h1>
                 <div className={styles.appleWrap}>
-                    <SVG style={bannerScrollY > -500 ? appleStyle : undefined}
+                    <SVG 
+                    style={bannerScrollY > -500 ? appleStyle : undefined}
                     className={bannerScrollY > halfSize * 2 ? styles.appleMasked : styles.apple} 
                     src='/autumn/section/apple/apple.svg'/>
                 </div>

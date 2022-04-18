@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
-import styles from '../../styles/components/home/navbar.module.scss';
+import styles from './navbar.module.scss';
 
 export default function Navbar():JSX.Element {
     const [sidebar, setSidebar] = useState<Boolean>(false);

@@ -8,6 +8,7 @@ export class ViewService implements OnModuleInit {
 
     async onModuleInit() : Promise<void> {
         try {
+            //@ts-ignore
             this.server = next({dev:process.env.NODE_ENV!=='production', dir: './src'});
             await this.server.prepare();
         } catch (err) {
