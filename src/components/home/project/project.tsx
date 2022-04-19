@@ -1,7 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
 import styles from './project.module.scss';
 
-export default function Project({mount, src}:{mount:boolean, src:string}):JSX.Element {
+interface ProjectProps{
+    mount:boolean;
+    src:string;
+    url?:string;
+}
+
+export default function Project({mount, src, url='#'}:ProjectProps):JSX.Element {
+    const router = useRouter();
     const [render, setRender] = useState<boolean>(mount);
 
     useEffect(() => {
@@ -18,7 +26,10 @@ export default function Project({mount, src}:{mount:boolean, src:string}):JSX.El
     return(
         render && (
             <div className={mount?styles.project:styles.projectHide} onAnimationEnd={animEnd}>
-                <img src={src}/>
+                <img 
+                    src={src}
+                    onClick={()=>router.push(url)}
+                />
             </div>
         )
     )

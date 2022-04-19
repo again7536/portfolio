@@ -12,12 +12,12 @@
     }
 }
 .project, .projectHide{
-    width:40vw;
-    height:40vh;
-    margin-bottom:1vh;
+    cursor:pointer;
+    width:100%;
+    margin-bottom:20px;
     img{
         width:100%;
-        height:100%;
+        min-height:400px;
         object-fit:cover;
     }
 }
@@ -40,6 +40,10 @@
 @media screen and (max-width:1024px) {
     .project, .projectHide{
         width:100vw;
-        height:25vh;
+        padding:0 10px;
+        img{
+            min-height:150px;
+            max-height:200px;
+        }
     }
 }

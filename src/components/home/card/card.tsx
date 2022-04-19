@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function card():JSX.Element{
+export default function card(){
     
     return(
         <>
