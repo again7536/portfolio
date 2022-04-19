@@ -3,34 +3,27 @@ import useWindowSize from '../../hooks/useWindowSize';
 import styles from './slotText.module.scss';
 
 interface Props {
-    start:Boolean,
+    startDelay?:number,
     length:number,
-    onSlotEnd?:()=>void,
     delay?:number
 }
 
-const SlotText:React.FC<Props> = ({start, length, delay, onSlotEnd, children}):JSX.Element => {
+const SlotText:React.FC<Props> = ({startDelay=0, length, delay=3, children}):JSX.Element => {
     const [slotIndex, setSlotIndex] = useState(0);
     const windowSize = useWindowSize();
 
     useEffect( () => {
-        if(start) {
-            if(delay !== undefined) {
-                const id = setTimeout(()=> {
-                    rollSlot(slotIndex);
-                }, delay*1000);
-                return () => clearTimeout(id);
-            }
-            else rollSlot(slotIndex);
-        }
-    }, [start]);
+        const id = setTimeout(()=> {
+            rollSlot(slotIndex);
+        }, startDelay*1000);
+        return () => clearTimeout(id);
+    }, []);
 
     const rollSlot = (slotIndex) => {
         if(slotIndex < length-1) {
             setSlotIndex(slotIndex+1)
-            setTimeout(() => rollSlot(slotIndex+1), 1000);
+            setTimeout(() => rollSlot(slotIndex+1), delay*1000);
         }
-        else if(onSlotEnd !== undefined) onSlotEnd();
     }
 
     const minUnit = windowSize.height > windowSize.width ? 'vw': 'vh';
@@ -38,7 +31,7 @@ const SlotText:React.FC<Props> = ({start, length, delay, onSlotEnd, children}):J
     return (
         <div className={styles.slotWrap}>
             <div className={styles.slot}
-                style={{transform:`translateY(${-20 * slotIndex}${minUnit})`}}
+                style={{transform:`translateY(${-100 * slotIndex/length}%)`}}
             >
                 {children}
             </div>

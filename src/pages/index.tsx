@@ -52,31 +52,32 @@ export default function Home():JSX.Element {
             `}</style>
             <Navbar/>
             <div className={styles.banner}>
-                <SlotText start={firstSlotEnd} delay={0.2} length={3} >
-                    <span>I AM A</span>
-                    <span>&nbsp;</span>
-                    <Link href='/about'><span style={{cursor:'pointer'}}>About Me</span></Link>
-                </SlotText>
-
-                <SlotText start={firstSlotEnd} delay={0.35} length={3}> 
-                    <SlotText start={true} length={5} onSlotEnd={firstSlotEnded}>
+                <div className={styles.bannerText}>
+                    <SlotText startDelay={3.1} delay={0.8} length={3} >
+                        <span>I AM A</span>
                         <span>&nbsp;</span>
-                        <span>&nbsp;</span>
-                        <span>Junior</span>
-                        <span>Skilled</span>
-                        <span>Frontend</span>
+                        <Link href='/about'><span style={{cursor:'pointer'}}>About Me</span></Link>
                     </SlotText>
-                    <span>&nbsp;</span>
-                    <Link href='/work'><span style={{cursor:'pointer'}}>Works</span></Link>
-                </SlotText>
 
-                <SlotText start={firstSlotEnd} delay={0.5} length={3}>
-                    <span>DEVELOPER</span>
-                    <span>&nbsp;</span>
-                    <Link href='/contact'><span style={{cursor:'pointer'}}>Contact</span></Link>
-                </SlotText>
-                
-                <SVG className={styles.bannerImage} src='/home/coding.svg'></SVG>
+                    <SlotText delay={0.8} length={7}> 
+                        <span>&nbsp;</span>
+                        <span>&nbsp;</span>
+                        <span>Helpful</span>
+                        <span>Junior</span>
+                        <span>Frontend</span>
+                        <span>&nbsp;</span>
+                        <Link href='/work'><span style={{cursor:'pointer'}}>Works</span></Link>
+                    </SlotText>
+
+                    <SlotText startDelay={3.4} delay={0.8} length={3}>
+                        <span>DEVELOPER</span>
+                        <span>&nbsp;</span>
+                        <Link href='/contact'><span style={{cursor:'pointer'}}>Contact</span></Link>
+                    </SlotText>
+                </div>
+                <div className={styles.bannerImageWrap}>
+                    <SVG className={styles.bannerImage} src='/home/coding.svg'></SVG>
+                </div>
             </div>
         </div>
     );

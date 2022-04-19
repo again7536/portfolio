@@ -1,10 +1,7 @@
 .slotWrap{
     overflow:hidden;
-    min-height:min(20vh, 20vw);
-    height:min(20vh, 20vw);
 }
 .slot{
-    height:100%;
     display:flex;
     flex-flow:column;
     justify-content:flex-start;
