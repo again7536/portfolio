@@ -44,6 +44,14 @@ a {
   src: url('/fonts/Nickainley-Normal.otf');
   font-display:swap;
 }
+@font-face {
+  font-family: 'drawing-guides';
+  src: url('/fonts/Drawing-Guides.ttf');
+}
+@font-face {
+  font-family: 'Code-Bold';
+  src: url('/fonts/CODE-Bold.otf');
+}
 
 /* svg1 in autumn.tsx */
 .svg1-off{
