@@ -5,10 +5,11 @@ import styles from './project.module.scss';
 interface ProjectProps{
     mount:boolean;
     src:string;
+    title:string;
     url?:string;
 }
 
-export default function Project({mount, src, url='#'}:ProjectProps):JSX.Element {
+export default function Project({mount, src, title='', url='#'}:ProjectProps):JSX.Element {
     const router = useRouter();
     const [render, setRender] = useState<boolean>(mount);
 
@@ -28,8 +29,9 @@ export default function Project({mount, src, url='#'}:ProjectProps):JSX.Element 
             <div className={mount?styles.project:styles.projectHide} onAnimationEnd={animEnd}>
                 <img 
                     src={src}
-                    onClick={()=>router.push(url)}
+                    onClick={()=>window.open(url, '_blank').focus()}
                 />
+                <h3>{title}</h3>
             </div>
         )
     )

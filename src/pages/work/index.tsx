@@ -16,9 +16,20 @@ export default function Work() {
 
     //these will be replaced with DB data.
     const years = [2020, 2021, 2022];
-    const images = [{year:2020, src:'/home/projects/project1.png', url:'/autumn'},
-                    {year:2021, src:'/home/projects/project2.jpg'},
-                    {year:2021, src:'/home/projects/project2.jpg'},];
+    const images = [
+        {
+            year:2020, 
+            src:'/home/projects/project1.png', 
+            url:'/autumn',
+            title:'이벤트 연습 페이지'
+        },
+        {
+            year:2021, 
+            src:'/home/projects/project2.jpg', 
+            url:'https://mini-submarine-8d0.notion.site/1b6f1ec038454871b839bb47b298cd94',
+            title:'Example-based FAQ 시스템'
+        },
+    ]
 
     const rotationSpeed = 0.1;
     const offset = 180/years.length;
@@ -81,18 +92,15 @@ export default function Work() {
             </div>
 
             <div className={styles.projectWrap}>
-                <div className={styles.projects}
-                    style={{transform:`translateY(${scrollProject}px)`}}
-                >
                     {images.map((data, index) =>
                         <Project 
                             key={index} 
                             mount={data.year === years[yearIndex]} 
                             src={data.src}
                             url={data.url}
+                            title={data.title}
                         />
                     )}
-                </div>
             </div>
         </div>
         </>
