@@ -29,6 +29,18 @@ export default function Work() {
             url:'https://mini-submarine-8d0.notion.site/1b6f1ec038454871b839bb47b298cd94',
             title:'Example-based FAQ 시스템'
         },
+        {
+            year:2021, 
+            src:'/home/projects/project3.jpg', 
+            url:'https://github.com/again7536/React_SSR',
+            title:'React SSR'
+        },
+        {
+            year:2021, 
+            src:'/home/projects/project4.jpg', 
+            url:'#',
+            title:'소프트웨어대학 생활지도교수 사이트'
+        },
     ]
 
     const rotationSpeed = 0.1;
